@@ -1,0 +1,2513 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="description"
+        content="Portofolio pribadi mahasiswa Teknik Informatika. Jelajahi profil, keterampilan, pencapaian, dan kontak saya.">
+
+    <title>My Portfolio | Informatics Student</title>
+
+    <style>
+        /* =========================================
+           1. GLOBAL VARIABLES
+        ========================================= */
+
+        :root {
+            --bg: #080b12;
+            --bg-secondary: #0e1320;
+            --card: #121927;
+            --card-hover: #192337;
+
+            --primary: #5b8cff;
+            --primary-light: #86aaff;
+
+            --text: #f1f5ff;
+            --text-secondary: #a1adc2;
+            --border: rgba(255, 255, 255, 0.09);
+
+            --radius: 18px;
+            --container: 1120px;
+
+            --transition: 0.3s ease;
+        }
+
+
+        /* =========================================
+           2. RESET & BASE
+        ========================================= */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 100px;
+        }
+
+        body {
+            background: var(--bg);
+            color: var(--text);
+
+            font-family:
+                Inter,
+                "Segoe UI",
+                Arial,
+                sans-serif;
+
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        img {
+            display: block;
+            max-width: 100%;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        button {
+            font: inherit;
+        }
+
+        button,
+        a {
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        button:focus-visible,
+        a:focus-visible {
+            outline: 2px solid var(--primary-light);
+            outline-offset: 4px;
+        }
+
+        .container {
+            width: min(
+                var(--container),
+                calc(100% - 40px)
+            );
+
+            margin-inline: auto;
+        }
+
+        .section {
+            padding: 100px 0;
+        }
+
+        .section-heading {
+            margin-bottom: 40px;
+        }
+
+        .section-label {
+            display: inline-block;
+
+            color: var(--primary-light);
+
+            font-size: 0.78rem;
+            font-weight: 700;
+
+            letter-spacing: 2px;
+            text-transform: uppercase;
+
+            margin-bottom: 10px;
+        }
+
+        .section-title {
+            font-size: clamp(2rem, 4vw, 3rem);
+
+            line-height: 1.2;
+            letter-spacing: -1px;
+        }
+
+        .section-description {
+            color: var(--text-secondary);
+
+            max-width: 600px;
+
+            margin-top: 14px;
+        }
+
+        .accent {
+            color: var(--primary-light);
+        }
+
+
+        /* =========================================
+           3. NAVBAR
+        ========================================= */
+
+        .navbar {
+            position: fixed;
+            inset: 0 0 auto 0;
+
+            z-index: 1000;
+
+            background: rgba(8, 11, 18, 0.85);
+            backdrop-filter: blur(18px);
+
+            border-bottom: 1px solid var(--border);
+        }
+
+        .nav-inner {
+            min-height: 76px;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            gap: 24px;
+        }
+
+        .logo {
+            font-size: 1.15rem;
+            font-weight: 800;
+
+            letter-spacing: -0.5px;
+            white-space: nowrap;
+        }
+
+        .logo span {
+            color: var(--primary-light);
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+
+            gap: 30px;
+
+            list-style: none;
+        }
+
+        .nav-links a {
+            display: block;
+
+            color: var(--text-secondary);
+
+            font-size: 0.9rem;
+            font-weight: 500;
+
+            transition: color var(--transition);
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: var(--primary-light);
+        }
+
+        .menu-toggle {
+            display: none;
+
+            width: 42px;
+            height: 42px;
+
+            background: var(--card);
+
+            border: 1px solid var(--border);
+            border-radius: 10px;
+
+            color: var(--text);
+
+            cursor: pointer;
+        }
+
+
+        /* =========================================
+           4. ABOUT ME
+        ========================================= */
+
+        .about-section {
+            min-height: 100vh;
+
+            display: flex;
+            align-items: center;
+
+            padding-top: 140px;
+        }
+
+        .about-grid {
+            display: grid;
+
+            grid-template-columns: 0.85fr 1.15fr;
+
+            align-items: center;
+
+            gap: 80px;
+        }
+
+        .profile-wrapper {
+            position: relative;
+
+            max-width: 350px;
+
+            margin-inline: auto;
+        }
+
+        .profile-wrapper::before {
+            content: "";
+
+            position: absolute;
+            inset: -15px;
+
+            border: 1px solid rgba(91, 140, 255, 0.35);
+
+            border-radius: 30px;
+
+            transform: rotate(-5deg);
+
+            z-index: -1;
+        }
+
+        .profile-image {
+            width: 100%;
+            aspect-ratio: 4 / 5;
+
+            object-fit: cover;
+            object-position: center;
+
+            border-radius: 24px;
+
+            background: var(--card);
+            border: 1px solid var(--border);
+        }
+
+        .profile-badge {
+            position: absolute;
+
+            bottom: 20px;
+            left: -20px;
+
+            padding: 12px 18px;
+
+            background: var(--card);
+
+            border: 1px solid var(--border);
+            border-radius: 12px;
+
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        .profile-badge span {
+            color: #69e6ae;
+        }
+
+        .about-content .section-label {
+            margin-bottom: 15px;
+        }
+
+        .about-title {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+
+            line-height: 1.12;
+            letter-spacing: -2px;
+
+            margin-bottom: 20px;
+        }
+
+        .about-summary {
+            color: var(--text-secondary);
+
+            margin-bottom: 30px;
+
+            max-width: 600px;
+        }
+
+        .profile-details {
+            display: grid;
+
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+
+            gap: 18px;
+
+            margin-bottom: 28px;
+        }
+
+        .detail-item {
+            padding: 16px;
+
+            background: var(--card);
+
+            border: 1px solid var(--border);
+            border-radius: 12px;
+
+            min-width: 0;
+        }
+
+        .detail-label {
+            display: block;
+
+            color: var(--text-secondary);
+
+            font-size: 0.75rem;
+            margin-bottom: 5px;
+        }
+
+        .detail-value {
+            font-size: 0.92rem;
+            font-weight: 600;
+
+            overflow-wrap: anywhere;
+        }
+
+        .activity-list {
+            display: flex;
+            flex-wrap: wrap;
+
+            gap: 10px;
+        }
+
+        .activity-tag {
+            padding: 7px 12px;
+
+            background: rgba(91, 140, 255, 0.1);
+
+            border: 1px solid rgba(91, 140, 255, 0.2);
+            border-radius: 8px;
+
+            color: var(--primary-light);
+
+            font-size: 0.78rem;
+        }
+
+
+        /* =========================================
+           5. WHAT I CAN DO
+        ========================================= */
+
+        .skills-section {
+            background: var(--bg-secondary);
+        }
+
+        .skills-grid {
+            display: grid;
+
+            grid-template-columns: 1.1fr 0.9fr;
+
+            gap: 28px;
+            align-items: stretch;
+        }
+
+
+        /* LEFT GRID: SKILL SLIDER */
+
+        .skill-showcase {
+            position: relative;
+
+            min-width: 0;
+            min-height: 440px;
+
+            overflow: hidden;
+
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+
+            background: var(--card);
+        }
+
+        .skill-slide {
+            display: none;
+
+            position: absolute;
+            inset: 0;
+        }
+
+        .skill-slide.active {
+            display: block;
+
+            animation: slideFade 0.4s ease;
+        }
+
+        @keyframes slideFade {
+            from {
+                opacity: 0.3;
+                transform: scale(1.02);
+            }
+
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .skill-slide img {
+            width: 100%;
+            height: 100%;
+
+            position: absolute;
+            inset: 0;
+
+            object-fit: cover;
+        }
+
+        .skill-slide::after {
+            content: "";
+
+            position: absolute;
+            inset: 0;
+
+            background: linear-gradient(
+                to top,
+                rgba(5, 8, 15, 0.98) 0%,
+                rgba(5, 8, 15, 0.55) 45%,
+                rgba(5, 8, 15, 0.05) 100%
+            );
+        }
+
+        .skill-caption {
+            position: absolute;
+
+            z-index: 2;
+
+            bottom: 0;
+            left: 0;
+            right: 0;
+
+            padding: 30px;
+        }
+
+        .skill-caption small {
+            color: var(--primary-light);
+
+            text-transform: uppercase;
+            letter-spacing: 2px;
+
+            font-size: 0.7rem;
+            font-weight: 700;
+        }
+
+        .skill-caption h3 {
+            font-size: 1.8rem;
+
+            margin: 8px 0;
+        }
+
+        .skill-caption p {
+            max-width: 440px;
+
+            color: #d2d9e8;
+            font-size: 0.9rem;
+        }
+
+
+        /* RIGHT GRID: SKILL MENU */
+
+        .skill-menu {
+            display: flex;
+            flex-direction: column;
+
+            gap: 12px;
+        }
+
+        .skill-option {
+            width: 100%;
+
+            display: flex;
+            align-items: center;
+
+            gap: 16px;
+
+            padding: 18px;
+
+            background: var(--card);
+
+            border: 1px solid var(--border);
+            border-radius: 14px;
+
+            text-align: left;
+            color: var(--text);
+
+            cursor: pointer;
+
+            transition:
+                background var(--transition),
+                border-color var(--transition),
+                transform var(--transition);
+        }
+
+        .skill-option:hover {
+            background: var(--card-hover);
+
+            transform: translateX(4px);
+        }
+
+        .skill-option.active {
+            background: rgba(91, 140, 255, 0.1);
+
+            border-color: var(--primary);
+        }
+
+        .skill-icon {
+            width: 48px;
+            height: 48px;
+
+            flex-shrink: 0;
+
+            display: grid;
+            place-items: center;
+
+            background: rgba(91, 140, 255, 0.12);
+
+            border-radius: 12px;
+
+            font-size: 1.3rem;
+        }
+
+        .skill-info {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .skill-info h3 {
+            font-size: 0.95rem;
+
+            margin-bottom: 3px;
+        }
+
+        .skill-info p {
+            color: var(--text-secondary);
+
+            font-size: 0.78rem;
+        }
+
+        .skill-arrow {
+            color: var(--text-secondary);
+
+            font-size: 1.1rem;
+
+            transition: color var(--transition);
+        }
+
+        .skill-option.active .skill-arrow {
+            color: var(--primary-light);
+        }
+
+
+        /* =========================================
+           6. ACHIEVEMENT
+        ========================================= */
+
+        .achievement-section {
+            overflow: hidden;
+        }
+
+        .achievement-slider {
+            position: relative;
+
+            height: 430px;
+
+            overflow: hidden;
+
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+
+            background: var(--card);
+        }
+
+        .achievement-slide {
+            display: none;
+
+            position: absolute;
+            inset: 0;
+        }
+
+        .achievement-slide.active {
+            display: block;
+
+            animation: slideFade 0.4s ease;
+        }
+
+        .achievement-slide img {
+            width: 100%;
+            height: 100%;
+
+            object-fit: cover;
+        }
+
+        .achievement-slide::after {
+            content: "";
+
+            position: absolute;
+            inset: 0;
+
+            background: linear-gradient(
+                to top,
+                rgba(5, 8, 15, 0.9),
+                transparent 75%
+            );
+        }
+
+        .achievement-caption {
+            position: absolute;
+
+            z-index: 2;
+
+            bottom: 30px;
+            left: 35px;
+            right: 35px;
+        }
+
+        .achievement-caption small {
+            color: var(--primary-light);
+
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+
+        .achievement-caption h3 {
+            font-size: clamp(1.5rem, 3vw, 2.2rem);
+
+            margin-top: 8px;
+        }
+
+        .slider-controls {
+            position: absolute;
+
+            z-index: 5;
+
+            top: 20px;
+            right: 20px;
+
+            display: flex;
+            gap: 10px;
+        }
+
+        .slider-btn {
+            width: 44px;
+            height: 44px;
+
+            display: grid;
+            place-items: center;
+
+            background: rgba(8, 11, 18, 0.75);
+
+            border: 1px solid var(--border);
+            border-radius: 50%;
+
+            color: white;
+
+            cursor: pointer;
+
+            transition: background var(--transition);
+        }
+
+        .slider-btn:hover {
+            background: var(--primary);
+        }
+
+        .slider-dots {
+            display: flex;
+            justify-content: center;
+
+            gap: 9px;
+
+            margin: 22px 0 30px;
+        }
+
+        .slider-dot {
+            width: 9px;
+            height: 9px;
+
+            background: #39445b;
+
+            border: none;
+            border-radius: 50%;
+
+            cursor: pointer;
+
+            transition:
+                width var(--transition),
+                background var(--transition);
+        }
+
+        .slider-dot.active {
+            width: 28px;
+
+            background: var(--primary);
+
+            border-radius: 10px;
+        }
+
+        .achievement-description {
+            max-width: 800px;
+
+            margin-inline: auto;
+
+            text-align: center;
+
+            color: var(--text-secondary);
+        }
+
+        .achievement-description strong {
+            color: var(--text);
+        }
+
+
+        /* =========================================
+           7. CONTACT
+        ========================================= */
+
+        .contact-section {
+            background: var(--bg-secondary);
+        }
+
+        .contact-layout {
+            display: grid;
+
+            grid-template-columns: 0.8fr 1.2fr;
+
+            gap: 60px;
+            align-items: start;
+        }
+
+        .contact-intro p {
+            color: var(--text-secondary);
+
+            margin-top: 20px;
+        }
+
+        .contact-list {
+            display: grid;
+
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+
+            gap: 14px;
+        }
+
+        .contact-card {
+            display: flex;
+            align-items: center;
+
+            gap: 14px;
+
+            padding: 20px;
+
+            background: var(--card);
+
+            border: 1px solid var(--border);
+            border-radius: 14px;
+
+            transition:
+                border-color var(--transition),
+                transform var(--transition),
+                background var(--transition);
+        }
+
+        .contact-card:hover {
+            background: var(--card-hover);
+
+            border-color: var(--primary);
+
+            transform: translateY(-4px);
+        }
+
+        .contact-icon {
+            width: 45px;
+            height: 45px;
+
+            flex-shrink: 0;
+
+            display: grid;
+            place-items: center;
+
+            background: rgba(91, 140, 255, 0.12);
+
+            border-radius: 12px;
+
+            color: var(--primary-light);
+
+            font-size: 1.1rem;
+            font-weight: 700;
+        }
+
+        .contact-info {
+            min-width: 0;
+        }
+
+        .contact-info h3 {
+            font-size: 0.95rem;
+        }
+
+        .contact-info p {
+            color: var(--text-secondary);
+
+            font-size: 0.75rem;
+
+            overflow-wrap: anywhere;
+        }
+
+
+        /* =========================================
+           8. FOOTER
+        ========================================= */
+
+        .footer {
+            padding: 25px 0;
+
+            border-top: 1px solid var(--border);
+        }
+
+        .footer-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            gap: 15px;
+        }
+
+        .footer p {
+            color: var(--text-secondary);
+
+            font-size: 0.8rem;
+        }
+
+        .back-to-top {
+            color: var(--primary-light);
+
+            font-size: 0.85rem;
+        }
+
+
+        /* =========================================
+           9. TABLET RESPONSIVE
+        ========================================= */
+
+        @media (max-width: 900px) {
+
+            .about-grid {
+                grid-template-columns: 0.8fr 1.2fr;
+
+                gap: 40px;
+            }
+
+            .profile-wrapper {
+                max-width: 280px;
+            }
+
+            .skills-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .skill-showcase {
+                min-height: 420px;
+            }
+
+            .skill-caption {
+                padding: 20px;
+            }
+
+            .contact-layout {
+                grid-template-columns: 1fr;
+
+                gap: 35px;
+            }
+
+        }
+
+
+        /* =========================================
+           10. MOBILE RESPONSIVE
+        ========================================= */
+
+        @media (max-width: 640px) {
+
+            .container {
+                width: calc(100% - 32px);
+            }
+
+            .section {
+                padding: 75px 0;
+            }
+
+            .nav-inner {
+                min-height: 68px;
+            }
+
+            .menu-toggle {
+                display: grid;
+                place-items: center;
+            }
+
+            .nav-links {
+                position: absolute;
+
+                top: 68px;
+                left: 0;
+                right: 0;
+
+                display: none;
+                flex-direction: column;
+                align-items: stretch;
+
+                gap: 0;
+
+                padding: 10px 16px 18px;
+
+                background: rgba(8, 11, 18, 0.98);
+
+                border-bottom: 1px solid var(--border);
+            }
+
+            .nav-links.open {
+                display: flex;
+            }
+
+            .nav-links a {
+                padding: 12px;
+
+                border-radius: 8px;
+            }
+
+            .nav-links a:hover {
+                background: var(--card);
+            }
+
+            /* ABOUT */
+
+            .about-section {
+                padding-top: 115px;
+            }
+
+            .about-grid {
+                grid-template-columns: 1fr;
+
+                gap: 40px;
+            }
+
+            .profile-wrapper {
+                width: 65%;
+                max-width: 260px;
+            }
+
+            .profile-badge {
+                left: -12px;
+                bottom: 14px;
+
+                font-size: 0.75rem;
+            }
+
+            .about-content {
+                text-align: center;
+            }
+
+            .about-title {
+                font-size: 2.6rem;
+
+                letter-spacing: -1.5px;
+            }
+
+            .about-summary {
+                font-size: 0.9rem;
+            }
+
+            .profile-details {
+                text-align: left;
+
+                gap: 10px;
+            }
+
+            .detail-item {
+                padding: 12px;
+            }
+
+            .detail-value {
+                font-size: 0.82rem;
+            }
+
+            .activity-list {
+                justify-content: center;
+            }
+
+
+            /* WHAT I CAN DO */
+
+            .skills-grid {
+                grid-template-columns: 1fr;
+            }
+
+            /*
+               Sesuai permintaan:
+               Pada mobile, slider kiri disembunyikan.
+               Grid kanan memenuhi seluruh lebar.
+            */
+
+            .skill-showcase {
+                display: none;
+            }
+
+            .skill-menu {
+                width: 100%;
+            }
+
+            .skill-option {
+                padding: 17px;
+            }
+
+            .skill-option:hover {
+                transform: none;
+            }
+
+
+            /* ACHIEVEMENT */
+
+            .achievement-slider {
+                height: 330px;
+            }
+
+            .achievement-caption {
+                left: 20px;
+                right: 20px;
+                bottom: 22px;
+            }
+
+            .achievement-caption h3 {
+                font-size: 1.4rem;
+            }
+
+            .slider-controls {
+                top: 12px;
+                right: 12px;
+            }
+
+            .slider-btn {
+                width: 38px;
+                height: 38px;
+            }
+
+            .achievement-description {
+                font-size: 0.9rem;
+
+                text-align: left;
+            }
+
+
+            /* CONTACT */
+
+            .contact-list {
+                grid-template-columns: 1fr;
+            }
+
+            .contact-card {
+                padding: 17px;
+            }
+
+
+            /* FOOTER */
+
+            .footer-inner {
+                flex-direction: column;
+
+                text-align: center;
+            }
+
+        }
+
+
+        /* =========================================
+           11. REDUCED MOTION
+        ========================================= */
+
+        @media (prefers-reduced-motion: reduce) {
+
+            *,
+            *::before,
+            *::after {
+                scroll-behavior: auto !important;
+
+                animation-duration: 0.01ms !important;
+                transition-duration: 0.01ms !important;
+            }
+
+        }
+
+    </style>
+</head>
+
+
+<body>
+
+
+    <!-- =========================================
+         NAVBAR
+    ========================================== -->
+
+    <header class="navbar">
+
+        <div class="container nav-inner">
+
+            <a href="#about" class="logo">
+                My<span>Portfolio.</span>
+            </a>
+
+            <button
+                class="menu-toggle"
+                id="menuToggle"
+                type="button"
+                aria-label="Buka menu navigasi"
+                aria-expanded="false"
+                aria-controls="navLinks">
+
+                ☰
+
+            </button>
+
+            <nav aria-label="Navigasi utama">
+
+                <ul class="nav-links" id="navLinks">
+
+                    <li>
+                        <a href="#about" class="active">
+                            About Me
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#skills">
+                            What I Can Do
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#achievement">
+                            Achievement
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#contact">
+                            Contact
+                        </a>
+                    </li>
+
+                </ul>
+
+            </nav>
+
+        </div>
+
+    </header>
+
+
+
+    <!-- =========================================
+         SECTION 1: ABOUT ME
+    ========================================== -->
+
+    <main>
+
+        <section class="section about-section" id="about">
+
+            <div class="container about-grid">
+
+
+                <!-- PROFILE PHOTO -->
+
+                <div class="profile-wrapper">
+
+                    <img
+                        src="RofidIrsad_TeknikInformatika.png"
+                        alt="Foto profil saya"
+                        class="profile-image"
+                        onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=700&q=85';"
+                    >
+
+                    <div class="profile-badge">
+
+                        <span>●</span>
+                        Open to opportunities
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- PROFILE INFORMATION -->
+
+                <div class="about-content">
+
+                    <span class="section-label">
+                        About Me
+                    </span>
+
+                    <h1 class="about-title">
+
+                        Halo, saya
+                        <span class="accent">
+                            Rofid Irsad.
+                        </span>
+
+                    </h1>
+
+                    <p class="about-summary">
+
+                        Saya adalah mahasiswa aktif Universitas Negeri Surabaya pada program studi S1 Teknik Informatika dan tengah menelusuri berbagai bidang IT untuk menentukan perjalanan karier yang diminati.
+
+                    </p>
+
+
+                    <!-- PERSONAL DATA -->
+
+                    <div class="profile-details">
+
+                        <div class="detail-item">
+
+                            <span class="detail-label">
+                                Nama Lengkap
+                            </span>
+
+                            <span class="detail-value">
+                                Rofid Irsad
+                            </span>
+
+                        </div>
+
+
+                        <div class="detail-item">
+
+                            <span class="detail-label">
+                                NIM
+                            </span>
+
+                            <span class="detail-value">
+                                26051204132
+                            </span>
+
+                        </div>
+
+
+                        <div class="detail-item">
+
+                            <span class="detail-label">
+                                Program Studi
+                            </span>
+
+                            <span class="detail-value">
+                                S1 Teknik Informatika
+                            </span>
+
+                        </div>
+
+
+                        <div class="detail-item">
+
+                            <span class="detail-label">
+                                Pendidikan
+                            </span>
+
+                            <span class="detail-value">
+                                Universitas Negeri Surabaya
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- ACTIVITIES -->
+
+                    <span
+                        class="detail-label"
+                        style="margin-bottom: 12px;">
+
+                        Aktivitas & Minat
+
+                    </span>
+
+                    <div class="activity-list">
+
+                        <span class="activity-tag">
+                            Game Developer
+                        </span>
+
+                        <span class="activity-tag">
+                            Programming
+                        </span>
+
+                        <span class="activity-tag">
+                            Artificial Intelligence
+                        </span>
+
+                        <span class="activity-tag">
+                            Internet of Things
+                        </span>
+
+                        <span class="activity-tag">
+                            UI/UX Engineer
+                        </span>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =========================================
+             SECTION 2: WHAT I CAN DO
+        ========================================== -->
+
+        <section
+            class="section skills-section"
+            id="skills">
+
+            <div class="container">
+
+
+                <div class="section-heading">
+
+                    <span class="section-label">
+                        My Expertise
+                    </span>
+
+                    <h2 class="section-title">
+
+                        What I Can
+                        <span class="accent">
+                            Do.
+                        </span>
+
+                    </h2>
+
+                    <p class="section-description">
+
+                        Beberapa bidang teknologi yang sedang saya
+                        pelajari dan kembangkan.
+
+                    </p>
+
+                </div>
+
+
+
+                <div class="skills-grid">
+
+
+                    <!-- LEFT GRID: IMAGE SLIDER -->
+
+                    <div
+                        class="skill-showcase"
+                        id="skillShowcase"
+                        aria-live="polite">
+
+
+                        <!-- SLIDE 1 -->
+
+                        <article
+                            class="skill-slide active"
+                            data-skill="web">
+
+                            <img
+                                src="pelepasan.JPG"
+                                alt="Leadership"
+                                loading="lazy"
+                                onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=1200&q=85';"
+                            >
+
+                            <div class="skill-caption">
+
+                                <small>
+                                    Skill 01
+                                </small>
+
+                                <h3>
+                                    Leadership
+                                </h3>
+
+                                <p>
+
+                                    Memiliki kemampuan memimpin organisasi yang cukup baik secara kedudukan utama maupun sebagai pengganti serta aktif mengkoordinasi tim.
+
+                                </p>
+
+                            </div>
+
+                        </article>
+
+
+
+                        <!-- SLIDE 2 -->
+
+                        <article
+                            class="skill-slide"
+                            data-skill="ui">
+
+                            <img
+                                src="b_ing.png"
+                                alt="Bahasa Inggris"
+                                loading="lazy"
+                                onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1559028012-481c04fa702d?auto=format&fit=crop&w=1200&q=85';"
+                            >
+
+                            <div class="skill-caption">
+
+                                <small>
+                                    Skill 02
+                                </small>
+
+                                <h3>
+                                    Bahasa Inggris
+                                </h3>
+
+                                <p>
+
+                                    Dapat membaca dan mendengarkan bahasa Inggris dengan baik dan benar
+                                </p>
+
+                            </div>
+
+                        </article>
+
+
+
+                        <!-- SLIDE 3 -->
+
+                        <article
+                            class="skill-slide"
+                            data-skill="programming">
+
+                            <img
+                                src="assets/skill-programming.jpg"
+                                alt="Ilustrasi pemrograman"
+                                loading="lazy"
+                                onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1515879218367-8466d910aaa4?auto=format&fit=crop&w=1200&q=85';"
+                            >
+
+                            <div class="skill-caption">
+
+                                <small>
+                                    Skill 03
+                                </small>
+
+                                <h3>
+                                    Pemograman Dasar
+                                </h3>
+
+                                <p>
+
+                                    Mampu memahami logika pemograman serta mampu menggunakan beberapa bahasa (Python, C++, HTML dan CSS)
+
+                                </p>
+
+                            </div>
+
+                        </article>
+
+
+
+                        <!-- SLIDE 4 -->
+
+                        <article
+                            class="skill-slide"
+                            data-skill="database">
+
+                            <img
+                                src="mpk.jpg"
+                                alt="Kolaborasi"
+                                loading="lazy"
+                                onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1544383835-bda2bc66a55d?auto=format&fit=crop&w=1200&q=85';"
+                            >
+
+                            <div class="skill-caption">
+
+                                <small>
+                                    Skill 04
+                                </small>
+
+                                <h3>
+                                    Kolaborasi Tim
+                                </h3>
+
+                                <p>
+
+                                    Dapat bekerja sama atau berkolaborasi dengan tim baik secara organisasi maupun kepanitiaan.
+
+                                </p>
+
+                            </div>
+
+                        </article>
+
+
+                    </div>
+
+
+
+                    <!-- RIGHT GRID: SKILL MENU -->
+
+                    <div
+                        class="skill-menu"
+                        aria-label="Daftar keterampilan">
+
+
+                        <!-- MENU 1 -->
+
+                        <button
+                            class="skill-option active"
+                            type="button"
+                            data-skill="web"
+                            aria-pressed="true">
+
+                            <span class="skill-icon">
+                                ★
+                            </span>
+
+                            <span class="skill-info">
+
+                                <h3>
+                                    Leadership
+                                </h3>
+
+                                <p>
+                                    Koordinasi kelompok atau tim.
+                                </p>
+
+                            </span>
+
+                            <span
+                                class="skill-arrow"
+                                aria-hidden="true">
+
+                                ↗
+
+                            </span>
+
+                        </button>
+
+
+
+                        <!-- MENU 2 -->
+
+                        <button
+                            class="skill-option"
+                            type="button"
+                            data-skill="ui"
+                            aria-pressed="false">
+
+                            <span class="skill-icon">
+                                あ
+                            </span>
+
+                            <span class="skill-info">
+
+                                <h3>
+                                    Bahasa Inggris
+                                </h3>
+
+                                <p>
+                                    Terbatas namun Fungsional
+                                </p>
+
+                            </span>
+
+                            <span
+                                class="skill-arrow"
+                                aria-hidden="true">
+
+                                ↗
+
+                            </span>
+
+                        </button>
+
+
+
+                        <!-- MENU 3 -->
+
+                        <button
+                            class="skill-option"
+                            type="button"
+                            data-skill="programming"
+                            aria-pressed="false">
+
+                            <span class="skill-icon">
+                                { }
+                            </span>
+
+                            <span class="skill-info">
+
+                                <h3>
+                                    Pemograman Dasar
+                                </h3>
+
+                                <p>
+                                    Logika, Algoritma & Coding
+                                </p>
+
+                            </span>
+
+                            <span
+                                class="skill-arrow"
+                                aria-hidden="true">
+
+                                ↗
+
+                            </span>
+
+                        </button>
+
+
+
+                        <!-- MENU 4 -->
+
+                        <button
+                            class="skill-option"
+                            type="button"
+                            data-skill="database"
+                            aria-pressed="false">
+
+                            <span class="skill-icon">
+                                ✇
+                            </span>
+
+                            <span class="skill-info">
+
+                                <h3>
+                                    Kolaborasi Tim
+                                </h3>
+
+                                <p>
+                                    Koordinasi dan kerja sama tim.
+                                </p>
+
+                            </span>
+
+                            <span
+                                class="skill-arrow"
+                                aria-hidden="true">
+
+                                ↗
+
+                            </span>
+
+                        </button>
+
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =========================================
+             SECTION 3: ACHIEVEMENT
+        ========================================== -->
+
+        <section
+            class="section achievement-section"
+            id="achievement">
+
+            <div class="container">
+
+
+                <div class="section-heading">
+
+                    <span class="section-label">
+                        My Journey
+                    </span>
+
+                    <h2 class="section-title">
+
+                        Achievement &
+                        <span class="accent">
+                            Experience.
+                        </span>
+
+                    </h2>
+
+                    <p class="section-description">
+
+                        Dokumentasi pencapaian, pengalaman,
+                        dan perjalanan saya dalam mengembangkan
+                        kemampuan saya.
+
+                    </p>
+
+                </div>
+
+
+
+                <!-- ACHIEVEMENT SLIDER -->
+
+                <div
+                    class="achievement-slider"
+                    id="achievementSlider"
+                    aria-label="Galeri pencapaian">
+
+
+                    <!-- ACHIEVEMENT SLIDE 1 -->
+
+                    <article
+                        class="achievement-slide active">
+
+                        <img
+                            src="b_ing.png"
+                            alt="Sertifikat Olimpiade Bahasa Inggris"
+                            loading="lazy"
+                            onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1523580494863-6f3031224c94?auto=format&fit=crop&w=1400&q=85';"
+                        >
+
+                        <div class="achievement-caption">
+
+                            <small>
+                                ACHIEVEMENT 01
+                            </small>
+
+                            <h3>
+                                Medali Perak Olimpiade Nasional Bahasa Inggris
+                            </h3>
+
+                        </div>
+
+                    </article>
+
+
+
+                    <!-- ACHIEVEMENT SLIDE 3 -->
+
+                    <article
+                        class="achievement-slide">
+
+                        <img
+                            src="osim24.jpg"
+                            alt="Anggota OSIM Masa Bakti 2024/2025"
+                            loading="lazy"
+                            onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&w=1400&q=85';"
+                        >
+
+                        <div class="achievement-caption">
+
+                            <small>
+                                ACHIEVEMENT 03
+                            </small>
+
+                            <h3>
+                                Anggota OSIM Masa Bakti 2024/2025
+                            </h3>
+
+                        </div>
+
+                    </article>
+
+<!-- ACHIEVEMENT SLIDE 4 -->
+
+                    <article
+                        class="achievement-slide">
+
+                        <img
+                            src="osim25.jpg"
+                            alt="Anggota OSIM Masa Bakti 2025/2026"
+                            loading="lazy"
+                            onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&w=1400&q=85';"
+                        >
+
+                        <div class="achievement-caption">
+
+                            <small>
+                                ACHIEVEMENT 04
+                            </small>
+
+                            <h3>
+                                Anggota OSIM Masa Bakti 2025/2026
+                            </h3>
+
+                        </div>
+
+                    </article>
+
+<!-- ACHIEVEMENT SLIDE 5 -->
+
+                    <article
+                        class="achievement-slide">
+
+                        <img
+                            src="da.jpg"
+                            alt="Anggota Dewan Ambalan Pangkalan MAN Karangasem"
+                            loading="lazy"
+                            onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&w=1400&q=85';"
+                        >
+
+                        <div class="achievement-caption">
+
+                            <small>
+                                ACHIEVEMENT 05
+                            </small>
+
+                            <h3>
+                                Anggota Dewan Ambalan dan Penegak Bantara Pangkalan MAN Karangasem
+                            </h3>
+
+                        </div>
+
+                    </article>
+
+
+                    <!-- ACHIEVEMENT SLIDE 6 -->
+
+                    <article
+                        class="achievement-slide">
+
+                        <img
+                            src="mpk.jpg"
+                            alt="Anggota Majelis Perwakilan Kelas Masa Bakti 2026/2027"
+                            loading="lazy"
+                            onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&w=1400&q=85';"
+                        >
+
+                        <div class="achievement-caption">
+
+                            <small>
+                                ACHIEVEMENT 06
+                            </small>
+
+                            <h3>
+                                Anggota Majelis Perwakilan Kelas Masa Bakti 2026/2027
+                            </h3>
+
+                        </div>
+
+                    </article>
+
+
+<!-- ACHIEVEMENT SLIDE 7 -->
+
+                    <article
+                        class="achievement-slide">
+
+                        <img
+                            src="wiratara.JPG"
+                            alt="Ketua Pelaksana Wiratya Dwipantara"
+                            loading="lazy"
+                            onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&w=1400&q=85';"
+                        >
+
+                        <div class="achievement-caption">
+
+                            <small>
+                                ACHIEVEMENT 07
+                            </small>
+
+                            <h3>
+                                Ketua Pelaksana Wiratya Dwipantara
+                            </h3>
+
+                        </div>
+
+                    </article>
+
+
+<!-- ACHIEVEMENT SLIDE 8 -->
+
+                    <article
+                        class="achievement-slide">
+
+                        <img
+                            src="pelepasan.JPG"
+                            alt="Ketua Pelaksana Pelepasan Kelas 12 Angkatan Ke-30"
+                            loading="lazy"
+                            onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&w=1400&q=85';"
+                        >
+
+                        <div class="achievement-caption">
+
+                            <small>
+                                ACHIEVEMENT 08
+                            </small>
+
+                            <h3>
+                                Ketua Pelaksana Pelepasan Kelas 12 Angkatan Ke-30
+                            </h3>
+
+                        </div>
+
+                    </article>
+
+
+                    <!-- SLIDER CONTROLS -->
+
+                    <div class="slider-controls">
+
+                        <button
+                            class="slider-btn"
+                            id="achievementPrev"
+                            type="button"
+                            aria-label="Pencapaian sebelumnya">
+
+                            &#8592;
+
+                        </button>
+
+                        <button
+                            class="slider-btn"
+                            id="achievementNext"
+                            type="button"
+                            aria-label="Pencapaian berikutnya">
+
+                            &#8594;
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- SLIDER DOTS -->
+
+                <div
+                    class="slider-dots"
+                    id="achievementDots"
+                    aria-label="Pilih slide pencapaian">
+
+                </div>
+
+
+
+                <!-- ACHIEVEMENT DESCRIPTION -->
+
+                <p class="achievement-description">
+
+                    Bagi saya, pencapaian bukan hanya tentang
+                    penghargaan atau sertifikat, tetapi juga
+                    tentang proses belajar, keberanian mencoba,
+                    dan kemampuan menyelesaikan masalah.
+
+                    Melalui setiap proyek dan pengalaman,
+                    saya berusaha meningkatkan kemampuan teknis,
+                    mengembangkan pola pikir kritis, serta
+                    membangun kebiasaan untuk terus belajar.
+                    <strong>
+                        Setiap proses adalah langkah menuju
+                        pengembangan diri yang lebih baik.
+                    </strong>
+
+                </p>
+
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =========================================
+             SECTION 4: CONTACT
+        ========================================== -->
+
+        <section
+            class="section contact-section"
+            id="contact">
+
+            <div class="container contact-layout">
+
+
+                <!-- CONTACT INTRO -->
+
+                <div class="contact-intro">
+
+                    <span class="section-label">
+                        Get In Touch
+                    </span>
+
+                    <h2 class="section-title">
+
+                        Let's Work
+                        <span class="accent">
+                            Together.
+                        </span>
+
+                    </h2>
+
+                    <p>
+
+                        Tertarik untuk berdiskusi, berkolaborasi,
+                        atau berbagi ide tentang teknologi?
+
+                        Hubungi saya melalui salah satu platform
+                        di bawah ini.
+
+                    </p>
+
+                </div>
+
+
+
+                <!-- CONTACT MENU -->
+
+                <div class="contact-list">
+
+
+                    <!-- EMAIL -->
+
+                    <a
+                        href="mailto:rofidirsyad08@gmail.com"
+                        class="contact-card">
+
+                        <span class="contact-icon">
+                            @
+                        </span>
+
+                        <span class="contact-info">
+
+                            <h3>
+                                Email
+                            </h3>
+
+                            <p>
+                                rofidirsyad08@gmail.com
+                            </p>
+
+                        </span>
+
+                    </a>
+
+
+
+                    <!-- LINKEDIN -->
+
+                    <a
+                        href="https://www.linkedin.com/in/rofid-irsad-431519421/"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="contact-card">
+
+                        <span class="contact-icon">
+                            in
+                        </span>
+
+                        <span class="contact-info">
+
+                            <h3>
+                                LinkedIn
+                            </h3>
+
+                            <p>
+                                Professional Profile
+                            </p>
+
+                        </span>
+
+                    </a>
+
+
+
+                    <!-- GITHUB -->
+
+                    <a
+                        href="https://github.com/username"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="contact-card">
+
+                        <span class="contact-icon">
+                            &lt;&gt;
+                        </span>
+
+                        <span class="contact-info">
+
+                            <h3>
+                                GitHub
+                            </h3>
+
+                            <p>
+                                Projects & Source Code
+                            </p>
+
+                        </span>
+
+                    </a>
+
+
+
+                    <!-- CV / RESUME -->
+
+                    <a
+                        href="CV ATS Rofid Irsad.pdf"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="contact-card">
+
+                        <span class="contact-icon">
+                            CV
+                        </span>
+
+                        <span class="contact-info">
+
+                            <h3>
+                                CV / Resume
+                            </h3>
+
+                            <p>
+                                View My Resume
+                            </p>
+
+                        </span>
+
+                    </a>
+
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+
+    <!-- =========================================
+         FOOTER
+    ========================================== -->
+
+    <footer class="footer">
+
+        <div class="container footer-inner">
+
+            <p>
+                &copy; <span id="currentYear"></span>
+                Rofid Irsad. All rights reserved.
+            </p>
+
+            <a href="#about" class="back-to-top">
+                Back to Top ↑
+            </a>
+
+        </div>
+
+    </footer>
+
+
+
+    <!-- =========================================
+         JAVASCRIPT
+    ========================================== -->
+
+    <script>
+
+        /* =========================================
+           1. MOBILE NAVIGATION
+        ========================================= */
+
+        const menuToggle = document.getElementById("menuToggle");
+        const navLinks = document.getElementById("navLinks");
+
+        menuToggle.addEventListener("click", function () {
+
+            const isOpen = navLinks.classList.toggle("open");
+
+            menuToggle.setAttribute(
+                "aria-expanded",
+                String(isOpen)
+            );
+
+            menuToggle.setAttribute(
+                "aria-label",
+                isOpen
+                    ? "Tutup menu navigasi"
+                    : "Buka menu navigasi"
+            );
+
+            menuToggle.textContent = isOpen ? "✕" : "☰";
+
+        });
+
+
+        // Tutup menu setelah link ditekan.
+
+        document.querySelectorAll("#navLinks a").forEach(function (link) {
+
+            link.addEventListener("click", function () {
+
+                navLinks.classList.remove("open");
+
+                menuToggle.setAttribute("aria-expanded", "false");
+                menuToggle.setAttribute(
+                    "aria-label",
+                    "Buka menu navigasi"
+                );
+
+                menuToggle.textContent = "☰";
+
+            });
+
+        });
+
+
+
+        /* =========================================
+           2. SKILL SLIDER
+           
+           Slider hanya berubah ketika menu skill
+           di sebelah kanan ditekan.
+        ========================================= */
+
+        const skillOptions = document.querySelectorAll(".skill-option");
+        const skillSlides = document.querySelectorAll(".skill-slide");
+
+        skillOptions.forEach(function (option) {
+
+            option.addEventListener("click", function () {
+
+                // Ambil identitas skill yang dipilih.
+
+                const selectedSkill = option.dataset.skill;
+
+
+                // Nonaktifkan semua menu skill.
+
+                skillOptions.forEach(function (item) {
+
+                    item.classList.remove("active");
+
+                    item.setAttribute("aria-pressed", "false");
+
+                });
+
+
+                // Aktifkan menu yang dipilih.
+
+                option.classList.add("active");
+
+                option.setAttribute("aria-pressed", "true");
+
+
+                // Sembunyikan semua slide.
+
+                skillSlides.forEach(function (slide) {
+
+                    slide.classList.remove("active");
+
+                });
+
+
+                // Tampilkan slide sesuai skill.
+
+                const targetSlide = document.querySelector(
+                    '.skill-slide[data-skill="' + selectedSkill + '"]'
+                );
+
+                if (targetSlide) {
+
+                    targetSlide.classList.add("active");
+
+                }
+
+            });
+
+        });
+
+
+
+        /* =========================================
+           3. ACHIEVEMENT SLIDER
+        ========================================= */
+
+        const achievementSlides = document.querySelectorAll(
+            ".achievement-slide"
+        );
+
+        const achievementPrev = document.getElementById(
+            "achievementPrev"
+        );
+
+        const achievementNext = document.getElementById(
+            "achievementNext"
+        );
+
+        const achievementDots = document.getElementById(
+            "achievementDots"
+        );
+
+        let currentAchievement = 0;
+
+
+        // Buat indikator slider secara otomatis.
+
+        achievementSlides.forEach(function (_, index) {
+
+            const dot = document.createElement("button");
+
+            dot.type = "button";
+
+            dot.className = "slider-dot";
+
+            dot.setAttribute(
+                "aria-label",
+                "Tampilkan pencapaian " + (index + 1)
+            );
+
+            dot.addEventListener("click", function () {
+
+                showAchievement(index);
+
+            });
+
+            achievementDots.appendChild(dot);
+
+        });
+
+
+        const dots = achievementDots.querySelectorAll(".slider-dot");
+
+
+        // Fungsi utama untuk mengganti slide.
+
+        function showAchievement(index) {
+
+            if (achievementSlides.length === 0) {
+                return;
+            }
+
+            // Mendukung perpindahan melingkar.
+
+            currentAchievement =
+                (
+                    index + achievementSlides.length
+                ) % achievementSlides.length;
+
+
+            // Perbarui gambar dan caption.
+
+            achievementSlides.forEach(function (slide, i) {
+
+                slide.classList.toggle(
+                    "active",
+                    i === currentAchievement
+                );
+
+            });
+
+
+            // Perbarui indikator.
+
+            dots.forEach(function (dot, i) {
+
+                const isActive = i === currentAchievement;
+
+                dot.classList.toggle("active", isActive);
+
+                dot.setAttribute(
+                    "aria-current",
+                    isActive ? "true" : "false"
+                );
+
+            });
+
+        }
+
+
+        // Tombol sebelumnya.
+
+        achievementPrev.addEventListener("click", function () {
+
+            showAchievement(currentAchievement - 1);
+
+        });
+
+
+        // Tombol berikutnya.
+
+        achievementNext.addEventListener("click", function () {
+
+            showAchievement(currentAchievement + 1);
+
+        });
+
+
+        // Inisialisasi slide pertama.
+
+        showAchievement(0);
+
+
+
+        /* =========================================
+           4. NAVBAR ACTIVE STATE
+        ========================================= */
+
+        const pageSections = document.querySelectorAll(
+            "main section[id]"
+        );
+
+        const navigationItems = document.querySelectorAll(
+            "#navLinks a"
+        );
+
+
+        if ("IntersectionObserver" in window) {
+
+            const sectionObserver = new IntersectionObserver(
+
+                function (entries) {
+
+                    entries.forEach(function (entry) {
+
+                        if (entry.isIntersecting) {
+
+                            const sectionId = entry.target.id;
+
+                            navigationItems.forEach(function (link) {
+
+                                const isActive =
+                                    link.getAttribute("href") ===
+                                    "#" + sectionId;
+
+                                link.classList.toggle(
+                                    "active",
+                                    isActive
+                                );
+
+                            });
+
+                        }
+
+                    });
+
+                },
+
+                {
+                    rootMargin: "-25% 0px -60% 0px"
+                }
+
+            );
+
+
+            pageSections.forEach(function (section) {
+
+                sectionObserver.observe(section);
+
+            });
+
+        }
+
+
+
+        /* =========================================
+           5. DYNAMIC COPYRIGHT YEAR
+        ========================================= */
+
+        document.getElementById("currentYear").textContent =
+            new Date().getFullYear();
+
+    </script>
+
+</body>
+
+</html>
